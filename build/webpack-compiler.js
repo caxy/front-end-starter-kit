@@ -1,4 +1,7 @@
 import webpack from 'webpack'
+import _debug from 'debug'
+
+const debug = _debug('app:build:webpack-compiler')
 
 export default function webpackCompiler(webpackConfig) {
   return new Promise((resolve, reject) => {
@@ -8,17 +11,17 @@ export default function webpackCompiler(webpackConfig) {
       const jsonStats = stats.toJson()
 
       if (err) {
-        console.log('Webpack compiler encountered a fatal error.', err)
+        debug('Webpack compiler encountered a fatal error.', err)
         return reject(err)
       } else if (jsonStats.errors.length > 0) {
-        console.log('Webpack compiler encountered errors.')
-        console.log(jsonStats.errors.join('\n'))
+        debug('Webpack compiler encountered errors.')
+        debug(jsonStats.errors.join('\n'))
         return reject(new Error('Webpack compiler encountered errors'))
       } else if (jsonStats.warnings.length > 0) {
-        console.log('Webpack compiler encountered warnings.')
-        console.log(jsonStats.warnings.join('\n'))
+        debug('Webpack compiler encountered warnings.')
+        debug(jsonStats.warnings.join('\n'))
       } else {
-        console.log('No errors or warnings encountered.')
+        debug('No errors or warnings encountered.')
       }
 
       resolve(jsonStats)

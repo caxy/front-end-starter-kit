@@ -3,7 +3,7 @@ import webpack from 'webpack'
 const webpackConfig = {
   entry: './src/main.js',
   output: {
-    path: '../dist',
+    path: './dist',
     filename: 'app.js'
   },
   module: {
