@@ -9,6 +9,11 @@ export default function webpackCompiler(webpackConfig) {
 
     compiler.run((err, stats) => {
       const jsonStats = stats.toJson()
+      debug(stats.toString({
+        chunks : false,
+        chunkModules : false,
+        colors : true
+      }))
 
       if (err) {
         debug('Webpack compiler encountered a fatal error.', err)
