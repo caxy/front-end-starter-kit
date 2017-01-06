@@ -1,2 +1,7 @@
 # front-end-starter-kit
-Front End Starter Kit
+===
+
+###1. Install assets
+```
+npm install
+```
