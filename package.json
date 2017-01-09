@@ -9,7 +9,8 @@
     "angular-ui-router": "^1.0.0-beta.1",
     "bootstrap": "^3.3.7",
     "normalize.css": "^3.0.3",
-    "restangular": "^1.6.1"
+    "restangular": "^1.6.1",
+    "satellizer": "^0.15.5"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",

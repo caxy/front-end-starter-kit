@@ -9,7 +9,7 @@ class LoginController {
 
   login() {
     if(this.username && this.password) {
-      console.log(this.user);
+      this.user.login(this.username, this.password);
     }
   }
 }

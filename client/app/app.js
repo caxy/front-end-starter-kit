@@ -4,14 +4,16 @@ import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
 import RestAngular from 'restangular';
-import uiBootstrap from "angular-ui-bootstrap";
+import uiBootstrap from 'angular-ui-bootstrap';
+import satellizer from 'satellizer';
 
 angular.module('app', [
     uiRouter,
     Common,
     Components,
     RestAngular,
-    uiBootstrap
+    uiBootstrap,
+    satellizer
   ])
   .config(($locationProvider) => {
     "ngInject";
@@ -19,6 +21,14 @@ angular.module('app', [
     // #how-to-configure-your-server-to-work-with-html5mode
     $locationProvider.html5Mode(true).hashPrefix('!');
   })
+    .config(function($authProvider) {
+        "ngInject"
+        $authProvider.httpInterceptor = function() { return true; };
+        $authProvider.withCredentials = false;
+        $authProvider.tokenRoot = null;
+        $authProvider.baseUrl = 'http://localhost:8000';
+        $authProvider.loginUrl = '/api/login_check';
+    })
 
     .component('app', AppComponent)
     .config(['RestangularProvider', function(RestangularProvider) {
@@ -65,4 +75,9 @@ angular.module('app', [
 
             return data;
         });
-    }]);
+    }])
+
+
+
+
+;
