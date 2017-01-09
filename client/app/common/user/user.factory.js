@@ -19,12 +19,12 @@ let UserFactory = function ($auth, Restangular) {
             return str.join("&");
           },
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    }).then(function(response) {
-      console.log(response);
-      console.log($auth.getPayload()['user_id']);
-      $auth.setToken(response.data.token);
-      Restangular.setDefaultHeaders({Authorization: 'Bearer ' + response.data.token});
-      console.log( Restangular.one('users', $auth.getPayload()['user_id']).getList());
+    }).then(() => {
+      Restangular.one('users', $auth.getPayload()['user_id']).get()
+          .then((response) => {
+            this.user = response;
+            console.log(this.user);
+          });
     }).catch(function(response) {
 
     });
