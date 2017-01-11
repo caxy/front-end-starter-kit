@@ -1,0 +1,22 @@
+{
+  "name": "caxy-front-end-starter-kit",
+  "version": "0.1.0",
+  "description": "Caxy's Front End Starter Kit",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caxy/front-end-starter-kit.git"
+  },
+  "author": "Caxy Code Creative (https://caxy.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/caxy/front-end-starter-kit/issues"
+  },
+  "homepage": "https://github.com/caxy/front-end-starter-kit#readme"
+}
