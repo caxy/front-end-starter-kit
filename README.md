@@ -47,9 +47,11 @@ standards are implemented for deeper directories.
 ├── server                   # Node server application that provides a http server for development (optional)
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
+│   ├── styleguide           # Assets used in the styleguide that are not used in the application 
+│   │   └── pattern-markup   # HTML partials for the styleguide referenced via KSS
+│   ├── styles               # Application styles
 │   ├── index.html           # Main HTML page container for app
-│   ├── main.js              # Application bootstrap and rendering
-│   └── styles               # Application styles
+│   └── main.js              # Application bootstrap and rendering
 │── tests                    # Unit tests
 └── package.json             # The list of 3rd party libraries and utilities
 ```
