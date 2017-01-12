@@ -7,7 +7,6 @@ class SignupController {
 
   persist() {
     this.user.persist();
-    console.log(this.user);
   }
 }
 

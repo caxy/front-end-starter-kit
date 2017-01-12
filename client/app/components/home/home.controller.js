@@ -1,6 +1,8 @@
 class HomeController {
-  constructor() {
+  constructor(User) {
+    "ngInject"
     this.name = 'home';
+    this.user = User;
   }
 }
 
