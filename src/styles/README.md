@@ -1,4 +1,4 @@
-# Project CSS
+# Application styles
 
 ## Naming Conventions: BEM
 
