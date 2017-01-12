@@ -1,9 +1,22 @@
-<nav class="navbar">
-  <div class="logo">
-    <h1><a ui-sref="home">{{ $ctrl.name }}</a></h1>
-  </div>
-  <div class="nav-links">
-    <span><a ui-sref="about">about</a></span>
-    <span><a ui-sref="login">Login</a></span>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Project name</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li ng-class="{active: $ctrl.isHomePage()}"><a ui-sref="home">Home</a></li>
+
+          <li ng-show="$ctrl.user.isAuthenticated()" ng-class="{active: $ctrl.isLoginPage()}" ><a ng-click="$ctrl.user.logout()" ui-sref="home">Logout</a></li>
+        <li ng-show="!$ctrl.user.isAuthenticated()" ng-class="{active: $ctrl.isLoginPage()}"><a ui-sref="login">Login</a></li>
+        <li ng-show="!$ctrl.user.isAuthenticated()" ng-class="{active: $ctrl.isSignupPage()}"><a ui-sref="signup">Register</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
   </div>
 </nav>
