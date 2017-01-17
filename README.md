@@ -41,10 +41,10 @@ standards are implemented for deeper directories.
 .
 ├── bin                      # Build/Start scripts
 ├── dist                     # The folder for the compiled output (ignored by git)
-├── docs                     # Documentation files for the project
+├── docs                     # (optional) Supplemental documentation files for the project, if needed
 ├── config                   # Project and build configurations
 ├── public                   # Static public assets (not imported anywhere in source code)
-├── server                   # Node server application that provides a http server for development (optional)
+├── server                   # (optional) Node server application that provides a http server for development
 │   └── main.js              # Server application entry point
 ├── src                      # Application source code
 │   ├── styleguide           # Assets used in the styleguide that are not used in the application 
