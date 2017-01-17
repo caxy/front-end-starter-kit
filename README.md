@@ -31,7 +31,30 @@ TODO: INSTALLATION AND SETUP
 
 ## Application Structure
 
-TODO: DOCUMENT APPLICATION STRUCTURE
+The application structure below is a starting point for the root project structure. This will be built upon as
+standards are implemented for deeper directories.
+
+*DEV: When proposing standards that affect the application structure, please update this tree.*
+
+
+```
+.
+├── bin                      # Build/Start scripts
+├── dist                     # The folder for the compiled output (ignored by git)
+├── docs                     # (optional) Supplemental documentation files for the project, if needed
+├── config                   # Project and build configurations
+├── public                   # Static public assets (not imported anywhere in source code)
+├── server                   # (optional) Node server application that provides a http server for development
+│   └── main.js              # Server application entry point
+├── src                      # Application source code
+│   ├── styleguide           # Assets used in the styleguide that are not used in the application 
+│   │   └── pattern-markup   # HTML partials for the styleguide referenced via KSS
+│   ├── styles               # Application styles
+│   ├── index.html           # Main HTML page container for app
+│   └── main.js              # Application bootstrap and rendering
+│── tests                    # Unit tests
+└── package.json             # The list of 3rd party libraries and utilities
+```
 
 ## Development
 
