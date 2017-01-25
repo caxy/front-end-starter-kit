@@ -19,6 +19,7 @@ const config = {
   dir_public : 'public',
   dir_server : 'server',
   dir_test   : 'tests',
+  dir_styleguide : 'dist/styleguide',
 
   // ----------------------------------
   // Server Configuration
@@ -116,7 +117,8 @@ config.paths = {
   base   : base,
   client : base.bind(null, config.dir_client),
   public : base.bind(null, config.dir_public),
-  dist   : base.bind(null, config.dir_dist)
+  dist   : base.bind(null, config.dir_dist),
+  styleguide : base.bind(null, config.dir_styleguide)
 };
 
 // ========================================================
