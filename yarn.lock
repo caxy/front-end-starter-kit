@@ -779,14 +779,13 @@ caseless@~0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.11.0.tgz#715b96ea9841593cc33067923f5ec60ebda4f7d7"
 
-caxy-styleguide-plugin@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/caxy-styleguide-plugin/-/caxy-styleguide-plugin-0.1.1.tgz#6ec46d26f1009f12ece6f58aabb4fb96ed3fb5b5"
+"caxy-styleguide-core@file:./../styleguide-core":
+  version "0.1.0"
   dependencies:
     normalize-css "^2.3.1"
 
-"caxy-styleguide-plugin@file:./../styleguide-plugin":
-  version "0.1.1"
+"caxy-styleguide-plugin@file:./../styleguide-core":
+  version "0.1.0"
   dependencies:
     normalize-css "^2.3.1"
 
