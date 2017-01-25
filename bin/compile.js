@@ -29,6 +29,7 @@ const webpackCompiler = (webpackConfig) =>
       } else {
         debug('No errors or warnings encountered.')
       }
+
       resolve(jsonStats)
     })
   });

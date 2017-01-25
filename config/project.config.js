@@ -1,6 +1,7 @@
 const path = require('path');
 const debug = require('debug')('app:config:project');
 const argv = require('yargs').argv;
+const ip = require('ip');
 
 debug('Creating default configuration.');
 // ========================================================
@@ -31,7 +32,7 @@ const config = {
   compiler_babel : {
     cacheDirectory : true,
     plugins        : ['transform-runtime'],
-    presets        : ['es2015', 'react', 'stage-0']
+    presets        : ['es2015']
   },
   compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
