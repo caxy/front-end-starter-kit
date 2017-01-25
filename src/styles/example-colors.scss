@@ -1,0 +1,17 @@
+// Example Color Swatches
+//
+// Markup: swatches_example.html
+//
+// Styleguide 1.0
+
+$example-color-1: (
+  'base': #072736,
+  'light': #1F5363,
+  'dark': #041c25
+);
+
+$example-color-2: (
+  'base': #df1e36,
+  'light': lighten(#df1e36, 20%),
+  'dark': darken(#df1e36, 10%)
+);

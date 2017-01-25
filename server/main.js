@@ -37,6 +37,8 @@ if (project.env === 'development') {
   // when the application is compiled.
   app.use(express.static(project.paths.public()));
 
+  app.use(express.static(project.paths.styleguide()));
+
   // This rewrites all routes requests to the root /index.html file
   // (ignoring file requests). If you want to implement universal
   // rendering, you'll want to remove this middleware.
