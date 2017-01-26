@@ -1,0 +1,82 @@
+@import 'caxy-styleguide-core/src/styleguide/caxy-zaba-template/scss/_mixins-styleguide.scss';
+
+// ------------------------------------------------------------------------------
+// Project Specific Settings
+// ------------------------------------------------------------------------------
+//
+// Add any information related to your styleguide that is styleguide-specific
+// here. This file currently manages breakpoint display and color swatch
+// population.
+
+
+
+
+
+
+// ------------------------------------------------------------------------------
+//   Breakpoint Display
+// ------------------------------------------------------------------------------
+
+$example-screen-micro: 20.3125rem;
+$example-screen-small: 42.5rem;
+$example-screen-medium: 57.5rem;
+$example-screen-large: 75rem;
+$example-screen-xlarge: 88.75rem;
+$example-screen-xxlarge: 100rem;
+
+#width-marker {
+
+  @media (min-width: $example-screen-micro) {
+    &::after {
+      content: "Breakpoint: Micro (#{$example-screen-micro})";
+    }
+  }
+  @media (min-width: $example-screen-small) {
+    &::after {
+      content: "Breakpoint: Small (#{$example-screen-small})";
+    }
+  }
+  @media (min-width: $example-screen-medium) {
+    &::after {
+      content: "Breakpoint: Medium (#{$example-screen-medium})";
+    }
+  }
+  @media (min-width: $example-screen-large) {
+    &::after {
+      content: "Breakpoint: Large (#{$example-screen-large})";
+    }
+  }
+  @media (min-width: $example-screen-xlarge) {
+    &::after {
+      content: "Breakpoint: XLarge (#{$example-screen-xlarge})";
+    }
+  }
+  @media (min-width: $example-screen-xxlarge) {
+    &::after {
+      content: "Breakpoint: XXLarge (#{$example-screen-xxlarge})";
+    }
+  }
+}
+
+
+
+
+
+// ------------------------------------------------------------------------------
+//   Color Swatches
+// ------------------------------------------------------------------------------
+
+// Path to either individual files or folders for your project's color variables
+@import '../../styles/example-colors.scss';
+
+// The $color-sets object is required if working swatches are needed. It can either
+// remain here, or be pulled into your project's color variable file.
+$color-sets: (
+        "example-1": $example-color-1,
+        "example-2": $example-color-2
+);
+
+// Do not remove or edit below; needed to create swatches based on your color sets.
+.kss-swatch {
+  @include make-swatches($color-sets);
+}

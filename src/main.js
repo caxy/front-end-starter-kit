@@ -3,10 +3,15 @@ import './styles/core.scss'
 const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {
+  if (__STYLEGUIDE__) {
+    // Do not do anything when on the styleguide.
+    return;
+  }
+
   MOUNT_NODE.innerHTML = 'Caxy Front End Starter Kit!';
 };
 
-if (__DEV__) {
+if (__DEV__ && !__STYLEGUIDE__) {
   if (module.hot) {
     // Development render functions.
     const renderApp = render;
