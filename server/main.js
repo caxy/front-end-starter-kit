@@ -37,6 +37,7 @@ if (project.env === 'development') {
   // when the application is compiled.
   app.use(express.static(project.paths.public()));
 
+  // Serve the KSS styleguide as static assets.
   app.use('/styleguide', express.static(project.paths.styleguide()));
 
   // This rewrites all routes requests to the root /index.html file
