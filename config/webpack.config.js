@@ -5,8 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const project = require('./project.config');
 const debug = require('debug')('app:config:webpack');
-const StyleguidePlugin = require('caxy-styleguide-webpack-plugin');
-const styleguideConfig = require('./styleguide.config');
 
 // Helper variables to determine the environment.
 const __DEV__ = project.globals.__DEV__;
@@ -67,9 +65,16 @@ webpackConfig.plugins = [
     minify   : {
       collapseWhitespace : true
     }
-  }),
-  new StyleguidePlugin(styleguideConfig)
+  })
 ];
+
+// Add StyleguidePlugin if styleguide is enabled.
+if (project.styleguide_enabled) {
+  const StyleguidePlugin = require('caxy-styleguide-webpack-plugin');
+  const styleguideConfig = require('./styleguide.config');
+
+  webpackConfig.plugins.push(new StyleguidePlugin(styleguideConfig));
+}
 
 // Ensure that the compiler exits on errors during testing so that
 // they do not get skipped and misreported.

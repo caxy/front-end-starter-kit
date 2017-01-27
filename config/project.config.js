@@ -22,6 +22,14 @@ const config = {
   dir_styleguide : 'dist/styleguide',
 
   // ----------------------------------
+  // Styleguide Configuration
+  // ----------------------------------
+  styleguide_enabled : true,
+  styleguide_version : '0.0.1',
+  styleguide_title   : 'Caxy Front End Starter Kit Style Guide',
+  styleguide_hide_pattern_status: true,
+
+  // ----------------------------------
   // Server Configuration
   // ----------------------------------
   server_host : ip.address(), // use string 'localhost' to prevent exposure on local network
@@ -118,7 +126,7 @@ config.paths = {
   client : base.bind(null, config.dir_client),
   public : base.bind(null, config.dir_public),
   dist   : base.bind(null, config.dir_dist),
-  styleguide : base.bind(null, config.dir_styleguide)
+  styleguideOutput : base.bind(null, config.dir_styleguide)
 };
 
 // ========================================================

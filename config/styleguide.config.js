@@ -1,33 +1,47 @@
 const project = require('../config/project.config');
-const builder = require('kss-caxy-zaba-template');
 
+/**
+ * Configuration object for the kss-node styleguide.
+ *
+ * This config is passed into StyleguidePlugin (caxy-styleguide-webpack-plugin) in webpack.config.js
+ * when the styleguide is enabled.
+ */
 const styleguideConfig = {
-    source: [
-        project.paths.client('styles'),
-        project.paths.client('styleguide/pattern-markup'),
-        project.paths.client('styleguide/project-assets')
+  // Project-specific settings pulled from project.config.js.
+  styleguide_version: project.styleguide_version,
+  title: project.styleguide_title,
+  hide_pattern_status: project.styleguide_hide_pattern_status,
+  destination: project.paths.styleguideOutput(),
+
+  // Source directories for KSS documentation.
+  source: [
+    project.paths.client('styles'),
+    project.paths.client('styleguide/pattern-markup'),
+    project.paths.client('styleguide/project-assets')
+  ],
+
+  // Custom SASS files to be included in styleguide, but not application.
+  sass: {
+    files: [
+      project.paths.client('styleguide/project-assets/_project-specific.scss')
     ],
-    sass: {
-        files: [
-            project.paths.client('styleguide/project-assets/_project-specific.scss')
-        ],
-        includePaths: [
-            project.paths.base('node_modules'),
-            project.paths.client('styles')
-        ]
-    },
-    styleguide_version: '0.0.1',
-    destination: project.paths.dist('styleguide'),
-    title: 'Caxy Front End Starter Kit Styleguide',
-    hide_pattern_status: true,
-    builder: project.paths.base('node_modules/kss-caxy-zaba-template/src'),
-    custom: [
-        'devnotes',
-        'hidemarkup',
-        'status',
-        'patterntype',
-        'containspatterns'
+    includePaths: [
+      project.paths.base('node_modules'),
+      project.paths.client('styles')
     ]
+  },
+
+  // Use the kss-caxy-zaba-template as the builder.
+  builder: project.paths.base('node_modules/kss-caxy-zaba-template'),
+
+  // Custom kss-node plugins.
+  custom: [
+    'devnotes',
+    'hidemarkup',
+    'status',
+    'patterntype',
+    'containspatterns'
+  ]
 };
 
 module.exports = styleguideConfig;

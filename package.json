@@ -74,9 +74,9 @@
   "bugs": "https://github.com/caxy/front-end-starter-kit/issues",
   "homepage": "https://github.com/caxy/front-end-starter-kit#readme",
   "dependencies": {
-    "normalize-css": "^2.3.1",
-    "caxy-styleguide-webpack-plugin": "^0.0.2",
-    "kss-caxy-zaba-template": "^0.0.2"
+    "caxy-styleguide-webpack-plugin": "^0.0.4",
+    "kss-caxy-zaba-template": "^0.0.5",
+    "normalize-css": "^2.3.1"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",

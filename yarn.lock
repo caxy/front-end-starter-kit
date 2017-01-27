@@ -779,23 +779,9 @@ caseless@~0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.11.0.tgz#715b96ea9841593cc33067923f5ec60ebda4f7d7"
 
-caxy-styleguide-core@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/caxy-styleguide-core/-/caxy-styleguide-core-0.0.2.tgz#07924902bc89e7a0eb446d447e6a38f5eb73b81d"
-  dependencies:
-    debug "^2.6.0"
-    fs-extra "^2.0.0"
-    kss "^3.0.0-beta.17"
-    node-sass "^4.3.0"
-    normalize-css "^2.3.1"
-    path "^0.12.7"
-
-caxy-styleguide-webpack-plugin@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/caxy-styleguide-webpack-plugin/-/caxy-styleguide-webpack-plugin-0.0.2.tgz#61c7dbb2d2709e7acf6ad25bc8d0255ab975f228"
-  dependencies:
-    caxy-styleguide-core "^0.0.2"
-    kss "^3.0.0-beta.17"
+caxy-styleguide-webpack-plugin@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/caxy-styleguide-webpack-plugin/-/caxy-styleguide-webpack-plugin-0.0.4.tgz#c54ff39099ed8094a21cf53ad1fc6094e8ebc9ce"
 
 center-align@^0.1.1:
   version "0.1.3"
@@ -2394,12 +2380,11 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
-kss-caxy-zaba-template@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/kss-caxy-zaba-template/-/kss-caxy-zaba-template-0.0.2.tgz#b466d5ae9cc751e529704012e45ced31a9dea264"
+kss-caxy-zaba-template@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/kss-caxy-zaba-template/-/kss-caxy-zaba-template-0.0.5.tgz#6d704cbab4a5c1758eea5213ba1945386ea45101"
   dependencies:
     fs-extra "^2.0.0"
-    kss "^3.0.0-beta.17"
     node-sass "^4.3.0"
     path "^0.12.7"
 

@@ -1,4 +1,4 @@
-# Welcome to the Caxy Boilerplate Style Guide
+# Welcome to the Caxy Front End Starter Kit Style Guide
 
 A record of patterns and components will be maintained here as they are
 added to the style guide, grouped by version number.
