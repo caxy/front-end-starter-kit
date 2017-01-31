@@ -48,7 +48,7 @@ $ yarn start   # Compile and launch (same as `npm start`)
 
 If all is well, you should see something like this:
 
-<img src="http://imgur.com/a/TTi45" />
+<img src="http://i.imgur.com/cHBLmkw.png" />
 
 Open up [http://localhost:3000]() in your browser and you should see the starter kit welcome page!
 
