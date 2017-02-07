@@ -29,15 +29,27 @@ const config = {
   // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
+
+  // This block is used to configure webpack's babel loader. This enables ES2015 features.
   compiler_babel : {
     cacheDirectory : true,
     plugins        : ['transform-runtime'],
     presets        : ['es2015']
   },
+
+  // Enables source maps in webpack. May be overridden in environments.config.js
   compiler_devtool         : 'source-map',
+
+  // Configure hash type to use in bundle's filename. May be overridden in environments.config.js
   compiler_hash_type       : 'hash',
+
+  // Set to true if the compiler should fail if the webpack compiler's stats object has warnings.
   compiler_fail_on_warning : false,
+
+  // Set to true to reduce output from webpack-dev-middleware
   compiler_quiet           : false,
+
+  // Configure the webpack bundle's public path. May be overridden in environments.config.js
   compiler_public_path     : '/',
   compiler_stats           : {
     chunks : false,
