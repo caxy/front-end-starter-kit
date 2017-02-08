@@ -56,6 +56,10 @@ const config = {
     chunkModules : false,
     colors : true
   },
+
+  // Any vendor modules used in the source code should be placed here. This includes things like babel-polyfill,
+  // react, redux, angular, etc. This allows webpack to create a separate entry point for these vendor modules,
+  // so they can be cached by the browser regardless of changes in the app bundle.
   compiler_vendors : [
 
   ]
