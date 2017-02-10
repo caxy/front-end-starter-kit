@@ -20,7 +20,7 @@ const styleguideConfig = {
     project.paths.client('styleguide/project-assets')
   ],
 
-  // Custom SASS files to be included in styleguide, but not application.
+  // Custom SASS files to be included in styleguide, but not the project/application.
   sass: {
     files: [
       project.paths.client('styleguide/project-assets/_project-specific.scss')
@@ -34,14 +34,8 @@ const styleguideConfig = {
   // Use the kss-caxy-zaba-template as the builder.
   builder: project.paths.base('node_modules/kss-caxy-zaba-template'),
 
-  // Custom kss-node plugins.
-  custom: [
-    'devnotes',
-    'hidemarkup',
-    'status',
-    'patterntype',
-    'containspatterns'
-  ]
+  // Custom kss-node options.
+  custom: project.styleguide_custom_options
 };
 
 module.exports = styleguideConfig;
