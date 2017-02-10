@@ -1,4 +1,5 @@
-import './styles/core.scss'
+import { getWelcomeMessage } from './modules/exampleModule';
+import './styles/core.scss';
 
 const MOUNT_NODE = document.getElementById('root');
 
@@ -8,7 +9,7 @@ let render = () => {
     return;
   }
 
-  MOUNT_NODE.innerHTML = 'Caxy Front End Starter Kit!';
+  MOUNT_NODE.innerHTML = getWelcomeMessage();
 };
 
 if (__DEV__ && (typeof __STYLEGUIDE__ === 'undefined' || !__STYLEGUIDE__)) {

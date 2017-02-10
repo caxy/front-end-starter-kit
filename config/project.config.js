@@ -83,6 +83,14 @@ const config = {
   // so they can be cached by the browser regardless of changes in the app bundle.
   compiler_vendors : [
 
+  ],
+
+  // ----------------------------------
+  // Test Configuration
+  // ----------------------------------
+  coverage_reporters : [
+      { type : 'text-summary' },
+      { type : 'lcov', dir : 'coverage' }
   ]
 };
 
