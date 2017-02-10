@@ -17,8 +17,8 @@ const webpackConfig = {
   target  : 'web',
   devtool : project.compiler_devtool,
   resolve : {
-    root       : project.paths.client(),
-    extensions : ['', '.js', '.jsx', '.json']
+    modules: [project.paths.client()],
+    extensions : ['.js', '.jsx', '.json']
   },
   module : {}
 };
@@ -107,7 +107,6 @@ if (__DEV__) {
       compress : {
         unused    : true,
         dead_code : true,
-        warnings  : false
       }
     })
   )
@@ -126,11 +125,11 @@ if (!__TEST__) {
 // Loaders
 // ------------------------------------
 // JavaScript / JSON
-webpackConfig.module.loaders = [{
+webpackConfig.module.rules = [{
   test    : /\.(js|jsx)$/,
   exclude : /node_modules/,
   loader  : 'babel-loader',
-  query   : project.compiler_babel
+  options   : project.compiler_babel
 }, {
   test   : /\.json$/,
   loader : 'json'
@@ -148,20 +147,20 @@ webpackConfig.module.loaders = [{
 // css-loader not to duplicate minimization.
 const BASE_CSS_LOADER = 'css?sourceMap&-minimize';
 
-webpackConfig.module.loaders.push({
+webpackConfig.module.rules.push({
   test    : /\.scss$/,
   exclude : null,
-  loaders : [
+  use : [
     'style',
     BASE_CSS_LOADER,
     'postcss',
     'sass?sourceMap'
   ]
 });
-webpackConfig.module.loaders.push({
+webpackConfig.module.rules.push({
   test    : /\.css$/,
   exclude : null,
-  loaders : [
+  use : [
     'style',
     BASE_CSS_LOADER,
     'postcss'
@@ -192,7 +191,7 @@ webpackConfig.postcss = [
 
 // File loaders
 /* eslint-disable */
-webpackConfig.module.loaders.push(
+webpackConfig.module.rules.push(
   { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
   { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
   { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
@@ -211,13 +210,13 @@ webpackConfig.module.loaders.push(
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
 if (!__DEV__) {
   debug('Applying ExtractTextPlugin to CSS loaders.');
-  webpackConfig.module.loaders.filter((loader) =>
-    loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
+  webpackConfig.module.rules.filter((loader) =>
+    loader.use && loader.use.find((name) => /css/.test(name.split('?')[0]))
   ).forEach((loader) => {
-    const first = loader.loaders[0];
-    const rest = loader.loaders.slice(1);
+    const first = loader.use[0];
+    const rest = loader.use.slice(1);
     loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
-    delete loader.loaders
+    delete loader.use
   });
 
   webpackConfig.plugins.push(
