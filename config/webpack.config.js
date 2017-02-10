@@ -25,6 +25,10 @@ const webpackConfig = {
 
 // ------------------------------------
 // Entry Points
+//
+// There are two entry points - app and vendor. All the vendor modules used in the app should be added to the
+// compiler_vendors array. This allows us to use the CommonsChunkPlugin to extract vendor modules from our app
+// bundle and place them into a vendor bundle, which allows for long-term caching, speeding up load times.
 // ------------------------------------
 const APP_ENTRY = project.paths.client('main.js');
 
@@ -51,6 +55,7 @@ webpackConfig.plugins = [
   // DefinePlugin is used to define global variables that can be used in the app.
   new webpack.DefinePlugin(project.globals),
   // HtmlWebpackPlugin injects the bundled assets into the entry HTML file.
+  // This is useful since our bundle names contain a hash which changes on compile.
   new HtmlWebpackPlugin({
     template : project.paths.client('index.html'),
     hash     : false,
@@ -124,7 +129,7 @@ if (!__TEST__) {
 webpackConfig.module.loaders = [{
   test    : /\.(js|jsx)$/,
   exclude : /node_modules/,
-  loader  : 'babel',
+  loader  : 'babel-loader',
   query   : project.compiler_babel
 }, {
   test   : /\.json$/,
@@ -133,6 +138,11 @@ webpackConfig.module.loaders = [{
 
 // ------------------------------------
 // Style Loaders
+//
+// style    - This loader injects <style> tags.
+// css      - Resolves imports and returns css.
+// postcss  - Applies PostCSS processing.
+// sass     - Loads and compiles sass files.
 // ------------------------------------
 // We use cssnano with the postcss loader, so we tell
 // css-loader not to duplicate minimization.

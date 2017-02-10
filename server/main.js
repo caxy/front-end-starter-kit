@@ -13,6 +13,15 @@ app.use(compress());
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
+//
+// webpack-dev-middleware:
+//    serves webpack-emitted files from memory, so compilcation can
+//    run multiple times during development without having to write files to disk. In dev mode,
+//    all requests are routed through this middleware.
+//
+// webpack-hot-middleware
+//    Works with webpack-dev-middleware to provide Hot Module Reloading without having to use wepback-dev-server.
+//    In dev mode, all requests are routed through this middleware.
 // ------------------------------------
 if (project.env === 'development') {
   const compiler = webpack(webpackConfig);

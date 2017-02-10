@@ -5,6 +5,8 @@ const webpackConfig = require('../config/webpack.config');
 const project = require('../config/project.config');
 
 // Wrapper around webpack to promisify its compiler and supply friendly logging
+// This uses webpack's Node API. Refer to that page in webpack docs for more information
+// about the stats object.
 const webpackCompiler = (webpackConfig) =>
   new Promise((resolve, reject) => {
     const compiler = webpack(webpackConfig);
@@ -34,6 +36,8 @@ const webpackCompiler = (webpackConfig) =>
     })
   });
 
+// This is the application compiler. It runs the webpackCompiler above,
+// and copies static assets from the configured public path to the dist path.
 const compile = () => {
   debug('Starting compiler.');
   return Promise.resolve()
