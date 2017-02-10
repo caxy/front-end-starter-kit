@@ -24,6 +24,11 @@ const config = {
   // ----------------------------------
   // Styleguide Configuration
   // ----------------------------------
+  // styleguide_custom_options : Enables custom variables to be inserted and populated in
+  // the styleguide on a per-pattern basis.
+  // styleguide_hide_pattern_status : Global value to enable or disable status filtering.
+  // Setting to `false` triggers the display of status filters on every page. Needs
+  // `status` to be present in styleguide_custom_options in order to render.
   styleguide_enabled : true,
   styleguide_version : '0.0.1',
   styleguide_title   : 'Caxy Front End Starter Kit Style Guide',
