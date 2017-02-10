@@ -35,9 +35,12 @@ const APP_ENTRY = project.paths.client('main.js');
 webpackConfig.entry = {
   app : __DEV__
     ? [APP_ENTRY].concat(`webpack-hot-middleware/client?path=${project.compiler_public_path}__webpack_hmr`)
-    : [APP_ENTRY],
-  vendor : project.compiler_vendors
+    : [APP_ENTRY]
 };
+
+if (project.compiler_devtool.length) {
+  webpackConfig.entry.vendor = project.compiler_vendors;
+}
 
 // ------------------------------------
 // Bundle Output
@@ -99,10 +102,8 @@ if (__DEV__) {
     new webpack.NoErrorsPlugin()
   )
 } else if (__PROD__) {
-  debug('Enabling plugins for production (OccurenceOrder, Dedupe & UglifyJS).');
+  debug('Enabling plugins for production (UglifyJS).');
   webpackConfig.plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress : {
         unused    : true,
@@ -149,45 +150,45 @@ const BASE_CSS_LOADER = 'css?sourceMap&-minimize';
 
 webpackConfig.module.rules.push({
   test    : /\.scss$/,
-  exclude : null,
   use : [
-    'style',
+    'style-loader',
     BASE_CSS_LOADER,
-    'postcss',
-    'sass?sourceMap'
+    'postcss-loader',
+    {
+      loader: 'sass-loader',
+      options: {
+        includePaths : project.paths.client('styles'),
+        sourceMap : true
+      }
+    }
   ]
 });
 webpackConfig.module.rules.push({
   test    : /\.css$/,
-  exclude : null,
   use : [
-    'style',
+    'style-loader',
     BASE_CSS_LOADER,
-    'postcss'
+    'postcss-loader'
   ]
 });
 
-webpackConfig.sassLoader = {
-  includePaths : project.paths.client('styles')
-};
-
-webpackConfig.postcss = [
-  cssnano({
-    autoprefixer : {
-      add      : true,
-      remove   : true,
-      browsers : ['last 2 versions']
-    },
-    discardComments : {
-      removeAll : true
-    },
-    discardUnused : false,
-    mergeIdents   : false,
-    reduceIdents  : false,
-    safe          : true,
-    sourcemap     : true
-  })
-];
+// webpackConfig.postcss = [
+//   cssnano({
+//     autoprefixer : {
+//       add      : true,
+//       remove   : true,
+//       browsers : ['last 2 versions']
+//     },
+//     discardComments : {
+//       removeAll : true
+//     },
+//     discardUnused : false,
+//     mergeIdents   : false,
+//     reduceIdents  : false,
+//     safe          : true,
+//     sourcemap     : true
+//   })
+// ];
 
 // File loaders
 /* eslint-disable */
@@ -213,14 +214,18 @@ if (!__DEV__) {
   webpackConfig.module.rules.filter((loader) =>
     loader.use && loader.use.find((name) => /css/.test(name.split('?')[0]))
   ).forEach((loader) => {
+    debug(loader)
     const first = loader.use[0];
     const rest = loader.use.slice(1);
-    loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
-    delete loader.use
+    loader.use = ExtractTextPlugin.extract({
+      fallback: first,
+      use: rest
+    })
   });
 
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('[name].[contenthash].css', {
+    new ExtractTextPlugin({
+      filename : '[name].[contenthash].css',
       allChunks : true
     })
   )
