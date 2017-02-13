@@ -17,7 +17,7 @@ const webpackConfig = {
   target  : 'web',
   devtool : project.compiler_devtool,
   resolve : {
-    modules: [project.paths.client()],
+    modules: ['node_modules', project.paths.client()],
     extensions : ['.js', '.jsx', '.json']
   },
   module : {}
@@ -38,7 +38,7 @@ webpackConfig.entry = {
     : [APP_ENTRY]
 };
 
-if (project.compiler_devtool.length) {
+if (project.compiler_vendors.length) {
   webpackConfig.entry.vendor = project.compiler_vendors;
 }
 
@@ -98,8 +98,7 @@ if (__TEST__ && !argv.watch) {
 if (__DEV__) {
   debug('Enabling plugins for live development (HMR, NoErrors).');
   webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   )
 } else if (__PROD__) {
   debug('Enabling plugins for production (UglifyJS).');
@@ -146,14 +145,36 @@ webpackConfig.module.rules = [{
 // ------------------------------------
 // We use cssnano with the postcss loader, so we tell
 // css-loader not to duplicate minimization.
-const BASE_CSS_LOADER = 'css?sourceMap&-minimize';
+const BASE_CSS_LOADER = 'css-loader?sourceMap&-minimize';
+const postCss = {
+  loader: 'postcss-loader',
+  options: {
+    plugins: () => [
+      cssnano({
+        autoprefixer : {
+          add      : true,
+          remove   : true,
+          browsers : ['last 2 versions']
+        },
+        discardComments : {
+          removeAll : true
+        },
+        discardUnused : false,
+        mergeIdents   : false,
+        reduceIdents  : false,
+        safe          : true,
+        sourcemap     : true
+      })
+    ]
+  }
+};
 
 webpackConfig.module.rules.push({
   test    : /\.scss$/,
   use : [
     'style-loader',
     BASE_CSS_LOADER,
-    'postcss-loader',
+    postCss,
     {
       loader: 'sass-loader',
       options: {
@@ -168,27 +189,9 @@ webpackConfig.module.rules.push({
   use : [
     'style-loader',
     BASE_CSS_LOADER,
-    'postcss-loader'
+    postCss
   ]
 });
-
-// webpackConfig.postcss = [
-//   cssnano({
-//     autoprefixer : {
-//       add      : true,
-//       remove   : true,
-//       browsers : ['last 2 versions']
-//     },
-//     discardComments : {
-//       removeAll : true
-//     },
-//     discardUnused : false,
-//     mergeIdents   : false,
-//     reduceIdents  : false,
-//     safe          : true,
-//     sourcemap     : true
-//   })
-// ];
 
 // File loaders
 /* eslint-disable */
