@@ -34,12 +34,12 @@ The tests are bundled in `~/tests/test-bundler.js` which loads and bundles all t
 - Chai    : Assertion/expectation library that can be paired with any Javascript testing framework.
 - Sinon   : Test spies, stubs, and mocks. No dependencies and works with any unit testing framework.
 - Karma   : Test runner that works with the testing framework to run the tests in any browsers.
-- Codecov : Code coverage.
 
 #### Additional Packages
 
 - babel-plugin-istanbul
 - chai-as-promised
+- codecov
 - karma-coverage
 - karma-mocha
 - karma-mocha-reporter
