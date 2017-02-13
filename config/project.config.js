@@ -32,14 +32,6 @@ const config = {
   styleguide_enabled : true,
   styleguide_version : '0.0.1',
   styleguide_title   : 'Caxy Front End Starter Kit Style Guide',
-  styleguide_hide_pattern_status: true,
-  styleguide_custom_options: [
-    'hidemarkup',
-    'patterntype',
-    'containspatterns',
-    'devnotes',
-    'status'
-  ],
 
   // ----------------------------------
   // Server Configuration
