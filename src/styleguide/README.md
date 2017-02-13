@@ -10,7 +10,7 @@ The styleguide needs access to three sets of resources:
 
 ### Pattern Markup
 
-KSS-node crawls through this folder to find any markup referenced in a 
+KSS-node crawls through assets to find any markup referenced in a 
 project's SCSS files. For example:
 
 ~~~~
@@ -38,9 +38,13 @@ instead:
 // Styleguide 1.2.3
 ~~~~
 
-As long as the `example-span.html` file is found somewhere in the
-`pattern-markup` folder, the KSS builder will pull it in to the compiled
-styleguide in the appropriate place.
+KSS allows you to identify certain folders as `source` folders for 
+styleguide documentation. This project has the `pattern-markup` folder
+set as a source by default.
+
+As long as the `example-span.html` referenced above file is found 
+somewhere in one of the `source` folders, the KSS builder will pull it
+in to the compiled styleguide in the appropriate place.
 
 
 ### Project Assets
