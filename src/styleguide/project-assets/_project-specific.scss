@@ -67,7 +67,7 @@ $example-screen-xxlarge: 100rem;
 // ------------------------------------------------------------------------------
 
 // Path to either individual files or folders for your project's color variables
-@import '../../styles/example-colors.scss';
+@import '../../styles/utilities/example-colors';
 
 // The $color-sets object is required if working swatches are needed. It can either
 // remain here, or be pulled into your project's color variable file.
