@@ -69,7 +69,7 @@ webpackConfig.plugins = [
 ];
 
 // Add StyleguidePlugin if styleguide is enabled.
-if (project.styleguide_enabled) {
+if (project.styleguide.enabled) {
   const StyleguidePlugin = require('caxy-styleguide-webpack-plugin');
   const styleguideConfig = require('./styleguide.config');
 
