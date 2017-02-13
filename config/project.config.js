@@ -22,18 +22,6 @@ const config = {
   dir_styleguide : 'dist/styleguide',
 
   // ----------------------------------
-  // Styleguide Configuration
-  // ----------------------------------
-  // styleguide_custom_options : Enables custom variables to be inserted and populated in
-  // the styleguide on a per-pattern basis.
-  // styleguide_hide_pattern_status : Global value to enable or disable status filtering.
-  // Setting to `false` triggers the display of status filters on every page. Needs
-  // `status` to be present in styleguide_custom_options in order to render.
-  styleguide_enabled : true,
-  styleguide_version : '0.0.1',
-  styleguide_title   : 'Caxy Front End Starter Kit Style Guide',
-
-  // ----------------------------------
   // Server Configuration
   // ----------------------------------
   server_host : ip.address(), // use string 'localhost' to prevent exposure on local network
@@ -131,6 +119,36 @@ config.paths = {
   public : base.bind(null, config.dir_public),
   dist   : base.bind(null, config.dir_dist),
   styleguideOutput : base.bind(null, config.dir_styleguide)
+};
+
+// ----------------------------------
+// Styleguide Configuration
+// ----------------------------------
+config.styleguide = {
+
+  enabled : true,
+  version : '0.0.1',
+  title   : 'Caxy Front End Starter Kit Style Guide',
+
+  // Source directories for KSS documentation.
+  source: [
+    config.paths.client('styles'),
+    config.paths.client('styleguide/pattern-markup'),
+    config.paths.client('styleguide/project-assets')
+  ],
+
+  builder: config.paths.base('node_modules/kss-caxy-zaba-template'),
+
+  // Custom SASS files to be included in styleguide, but not the project/application.
+  sass: {
+    files: [
+      config.paths.client('styleguide/project-assets/_project-specific.scss')
+    ],
+      includePaths: [
+      config.paths.base('node_modules'),
+      config.paths.client('styles')
+    ]
+  }
 };
 
 // ========================================================

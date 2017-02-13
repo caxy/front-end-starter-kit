@@ -7,7 +7,7 @@ const project = require('../config/project.config');
  * when the styleguide is enabled.
  *
  *
- * Custom KSS Node Options
+ * KSS Custom Options
  *
  * All of these are optional, but they provide hooks between KSS and the current
  * handlebars approach that allow for extra information to be displayed.
@@ -38,33 +38,19 @@ const project = require('../config/project.config');
  */
 const styleguideConfig = {
   // Project-specific settings pulled from project.config.js.
-  styleguide_version: project.styleguide_version,
-  title: project.styleguide_title,
+  styleguide_version: project.styleguide.version,
+  title: project.styleguide.title,
   destination: project.paths.styleguideOutput(),
 
   // Source directories for KSS documentation.
-  source: [
-    project.paths.client('styles'),
-    project.paths.client('styleguide/pattern-markup'),
-    project.paths.client('styleguide/project-assets')
-  ],
+  source: project.styleguide.source,
 
   // Custom SASS files to be included in styleguide, but not the project/application.
-  sass: {
-    files: [
-      project.paths.client('styleguide/project-assets/_project-specific.scss')
-    ],
-    includePaths: [
-      project.paths.base('node_modules'),
-      project.paths.client('styles')
-    ]
-  },
+  sass: project.styleguide.sass,
 
-  // Use the kss-caxy-zaba-template as the builder.
-  builder: project.paths.base('node_modules/kss-caxy-zaba-template'),
+  builder: project.styleguide.builder,
 
-  // Pattern Status filters
-  // Pattern status filters will be made available when this is set to false.
+  // Pattern Status filters will be made available when this is set to false.
   hide_pattern_status: true,
 
   // KSS Custom Options
