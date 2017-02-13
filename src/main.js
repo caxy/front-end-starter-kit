@@ -1,49 +1,60 @@
-import { getWelcomeMessage } from './modules/exampleModule';
-import './styles/core.scss';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import createStore from './store/createStore'
+import AppContainer from './containers/AppContainer'
 
+// ========================================================
+// Store Instantiation
+// ========================================================
+const initialState = window.___INITIAL_STATE__;
+const store = createStore(initialState);
+
+// ========================================================
+// Render Setup
+// ========================================================
 const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {
-  if ((typeof __STYLEGUIDE__ !== 'undefined' && __STYLEGUIDE__)) {
-    // Do not do anything when on the styleguide.
-    return;
-  }
+  const routes = require('./routes/index').default(store);
 
-  MOUNT_NODE.innerHTML = getWelcomeMessage();
+  ReactDOM.render(
+  <AppContainer store={store} routes={routes} />,
+    MOUNT_NODE
+  )
 };
 
-if (__DEV__ && (typeof __STYLEGUIDE__ === 'undefined' || !__STYLEGUIDE__)) {
+// This code is excluded from production bundle
+if (__DEV__) {
   if (module.hot) {
-    // Development render functions.
+    // Development render functions
     const renderApp = render;
     const renderError = (error) => {
-      MOUNT_NODE.innerHTML = error.message;
+      const RedBox = require('redbox-react').default;
+
+      ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
     };
 
-    // Wrap render in try/catch.
+    // Wrap render in try/catch
     render = () => {
       try {
-        renderApp();
+        renderApp()
       } catch (error) {
         console.error(error);
-        renderError(error);
+        renderError(error)
       }
     };
 
-    // Setup hot module replacement.
-    module.hot.accept(() => {
-      render();
-    });
-
-    // Hot module replacement can be set up more complex here. For example, if using react:
-    //
-    // module.hot.accept('./routes/index', () =>
-    //   setImmediate(() => {
-    //     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    //     render();
-    //   });
-    // );
+    // Setup hot module replacement
+    module.hot.accept('./routes/index', () =>
+      setImmediate(() => {
+        ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+        render()
+      })
+    )
   }
 }
 
+// ========================================================
+// Go!
+// ========================================================
 render();

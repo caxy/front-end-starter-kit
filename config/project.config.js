@@ -1,3 +1,4 @@
+/* eslint key-spacing:0 spaced-comment:0 */
 const path = require('path');
 const debug = require('debug')('app:config:project');
 const argv = require('yargs').argv;
@@ -55,7 +56,7 @@ const config = {
   compiler_babel : {
     cacheDirectory : true,
     plugins        : ['transform-runtime'],
-    presets        : ['es2015']
+    presets        : ['es2015', 'react', 'stage-0']
   },
 
   // Enables source maps in webpack. May be overridden in environments.config.js
@@ -82,7 +83,10 @@ const config = {
   // react, redux, angular, etc. This allows webpack to create a separate entry point for these vendor modules,
   // so they can be cached by the browser regardless of changes in the app bundle.
   compiler_vendors : [
-
+    'react',
+    'react-redux',
+    'react-router',
+    'redux'
   ],
 
   // ----------------------------------
