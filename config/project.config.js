@@ -148,7 +148,9 @@ config.styleguide = {
       config.paths.base('node_modules'),
       config.paths.client('styles')
     ]
-  }
+  },
+
+  destination: '/styleguide'
 };
 
 // ========================================================
