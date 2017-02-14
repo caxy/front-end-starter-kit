@@ -177,3 +177,13 @@ Babel is configured to use [babel-plugin-transform-runtime](https://www.npmjs.co
 ## Contributing
 
 TODO: GENERAL INFO ON CONTRIBUTING TO THIS IF WE HAVE GUIDELINES OR OTHER THINGS
+
+## Styleguide
+
+When compiled, the styleguide by default can be found at `/styleguide`.
+
+KSS Node uses a slight variation of markdown to populate Handlebars
+templates and create your styleguide. This markdown should be included
+in relevant CSS files, and provides inline documentation of your CSS as
+a nice byproduct. Detailed examples can be found in the
+[KSS Node project repo](https://github.com/kss-node/kss-node).
