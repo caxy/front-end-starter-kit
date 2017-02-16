@@ -32,9 +32,16 @@ export const doubleAsync = () => {
   }
 };
 
+export const onIncrementAsync = () => {
+    return {
+      type: 'INCREMENT_ASYNC'
+    };
+};
+
 export const actions = {
   increment,
-  doubleAsync
+  doubleAsync,
+  onIncrementAsync
 };
 
 // ------------------------------------

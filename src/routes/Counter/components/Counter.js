@@ -1,22 +1,22 @@
 import React from 'react';
 
-export const Counter = (props) => (
+export const Counter = ({ counter, increment, onIncrementAsync}) => (
   <div style={{ margin: '0 auto' }} >
-    <h2>Counter: {props.counter}</h2>
-    <button className='btn btn-default' onClick={props.increment}>
+    <h2>Counter: {counter}</h2>
+    <button className='btn btn-default' onClick={increment}>
       Increment
     </button>
     {' '}
-    <button className='btn btn-default' onClick={props.doubleAsync}>
-      Double (Async)
+    <button className='btn btn-default' onClick={onIncrementAsync}>
+      Increment after 1 second
     </button>
   </div>
 );
 
 Counter.propTypes = {
-  counter     : React.PropTypes.number.isRequired,
-  doubleAsync : React.PropTypes.func.isRequired,
-  increment   : React.PropTypes.func.isRequired
+  counter          : React.PropTypes.number.isRequired,
+  onIncrementAsync : React.PropTypes.func.isRequired,
+  increment        : React.PropTypes.func.isRequired
 };
 
 export default Counter;
