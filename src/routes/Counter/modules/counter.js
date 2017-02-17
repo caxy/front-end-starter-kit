@@ -1,7 +1,11 @@
+import { delay } from 'redux-saga';
+import { put, call, takeEvery } from 'redux-saga/effects';
+
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT';
+export const COUNTER_DOUBLE = 'COUNTER_DOUBLE';
 export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC';
 
 // ------------------------------------
@@ -14,34 +18,20 @@ export function increment (value = 1) {
   }
 }
 
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk! */
-
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch({
-          type    : COUNTER_DOUBLE_ASYNC,
-          payload : getState().counter
-        });
-        resolve()
-      }, 200)
-    })
+export function double () {
+  return {
+    type    : COUNTER_DOUBLE
   }
-};
+}
 
-export const onIncrementAsync = () => {
-    return {
-      type: 'INCREMENT_ASYNC'
-    };
-};
+export function doubleAsync () {
+  return { type: COUNTER_DOUBLE_ASYNC };
+}
 
 export const actions = {
   increment,
-  doubleAsync,
-  onIncrementAsync
+  double,
+  doubleAsync
 };
 
 // ------------------------------------
@@ -49,7 +39,26 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [COUNTER_INCREMENT]    : (state, action) => state + action.payload,
-  [COUNTER_DOUBLE_ASYNC] : (state, action) => state * 2
+  [COUNTER_DOUBLE] : (state, action) => state * 2
+};
+
+// ------------------------------------
+// Sagas
+// ------------------------------------
+// Our worker Saga: will perform the async increment task
+export function* doDoubleAsync() {
+  yield call(delay, 1000);
+  yield put(double());
+}
+
+// Our watcher Saga: spawn a new doubleAsync task on each INCREMENT_ASYNC
+export function* watchIncrementAsync() {
+  yield takeEvery(COUNTER_DOUBLE_ASYNC, doDoubleAsync);
+}
+
+// Export the sagas, which is used in ./../index.js to add them to the store.
+export const sagas = {
+  watchIncrementAsync
 };
 
 // ------------------------------------

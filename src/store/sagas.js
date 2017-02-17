@@ -1,25 +1,42 @@
-import { delay } from 'redux-saga';
-import { put, call, takeEvery } from 'redux-saga/effects';
-import { increment } from '../routes/Counter/modules/counter';
+import _ from 'lodash';
+import { fork } from 'redux-saga/effects';
 
-export function* helloSaga () {
-    console.log('Hello Sagas!');
-}
+export const makeRootSaga = (asyncSagas = {}) => {
+  const sagas = {
+    // Sync sagas can be added here.
+    ...asyncSagas
+  };
 
-// Our worker Saga: will perform the async increment task
-export function* incrementAsync() {
-    yield call(delay, 1000);
-    yield put(increment());
-}
+  return function* rootSaga () {
+    yield _.values(sagas).map(saga => fork(saga));
+  }
+};
 
-// Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
-export function* watchIncrementAsync() {
-    yield takeEvery('INCREMENT_ASYNC', incrementAsync);
-}
+const rerunSagas = (store) => {
+  store.sagaTask.cancel();
+  store.sagaTask.done.then(() => {
+    store.sagaTask = store.runSaga(makeRootSaga(store.asyncSagas));
+  });
+};
 
-export default function* rootSaga () {
-    yield [
-        helloSaga(),
-        watchIncrementAsync()
-    ];
-}
+export const injectSaga = (store, { key, saga }, reload = true) => {
+  if (Object.hasOwnProperty.call(store.asyncSagas, key)) {
+      return;
+  }
+
+  store.asyncSagas[key] = saga;
+
+  if (reload) {
+    rerunSagas(store);
+  }
+};
+
+export const injectMultipleSagas = (store, sagas) => {
+  _.forEach(sagas, (saga, key) => {
+    injectSaga(store, { key, saga }, false);
+  });
+
+  rerunSagas(store);
+};
+
+export default makeRootSaga;
