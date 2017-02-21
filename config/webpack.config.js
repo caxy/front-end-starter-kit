@@ -2,7 +2,6 @@ const argv = require('yargs').argv;
 const webpack = require('webpack');
 const cssnano = require('cssnano');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const project = require('./project.config');
 const debug = require('debug')('app:config:webpack');
 
@@ -205,33 +204,5 @@ webpackConfig.module.rules.push(
   { test: /\.(png|jpg)$/,    loader: 'url-loader?limit=8192' }
 );
 /* eslint-enable */
-
-// ------------------------------------
-// Finalize Configuration
-// ------------------------------------
-// when we don't know the public path (we know it only when HMR is enabled [in development]) we
-// need to use the extractTextPlugin to fix this issue:
-// http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
-// if (!__DEV__) {
-//   debug('Applying ExtractTextPlugin to CSS loaders.');
-//   webpackConfig.module.rules.filter((loader) =>
-//     loader.use && loader.use.find((name) => /css/.test(name.split('?')[0]))
-//   ).forEach((loader) => {
-//     debug(loader)
-//     const first = loader.use[0];
-//     const rest = loader.use.slice(1);
-//     loader.use = ExtractTextPlugin.extract({
-//       fallback: first,
-//       use: rest
-//     })
-//   });
-//
-//   webpackConfig.plugins.push(
-//     new ExtractTextPlugin({
-//       filename : '[name].[contenthash].css',
-//       allChunks : true
-//     })
-//   )
-// }
 
 module.exports = webpackConfig;

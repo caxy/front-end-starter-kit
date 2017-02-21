@@ -56,12 +56,12 @@ if (project.env === 'development') {
     const filename = path.join(compiler.outputPath, 'index.html');
     compiler.outputFileSystem.readFile(filename, (err, result) => {
       if (err) {
-        return next(err)
+        return next(err);
       }
       res.set('content-type', 'text/html');
       res.send(result);
-      res.end()
-    })
+      res.end();
+    });
   });
 } else {
   debug(
@@ -75,7 +75,7 @@ if (project.env === 'development') {
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
   // server in production.
-  app.use(express.static(project.paths.dist()))
+  app.use(express.static(project.paths.dist()));
 }
 
 module.exports = app;
