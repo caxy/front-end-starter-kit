@@ -55,7 +55,7 @@ TODO: PROJECT DESCRIPTION
   
   Branch names must always be broken into 3 parts (a part is deliminated by `/`).
   
-  For example, the core starter kit that uses React will be on branch:
+  For example, the starter kits for react, angular, and angular2 will be on these 3 branches, respectively:
   
   ```
   kit/react/core
