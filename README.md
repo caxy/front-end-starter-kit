@@ -6,6 +6,7 @@ TODO: PROJECT DESCRIPTION
 
 ## Table of Contents
 
+1. [Starter Kit Variations](#starter-kit-variations)
 1. [Features](#features)
 1. [Requirements](#requirements)
 1. [Getting Started](#getting-started)
@@ -17,6 +18,72 @@ TODO: PROJECT DESCRIPTION
 1. [Build System](#build-system)
 1. [Learning Resources](#learning-resources)
 1. [Contributing](#contributing)
+
+## Starter Kit Variations
+
+### Core
+
+| Variation  | Sub-Variation | Branch name          | Description                             |
+|------------|---------------|----------------------|-----------------------------------------|
+| core       | n/a           | master               | The base to all starter kits            |
+| styleguide | core          | kit/styleguide/core  | KSS Styleguide                          |
+
+### React
+
+| Variation  | Sub-Variation | Branch name          | Description                             |
+|------------|---------------|----------------------|-----------------------------------------|
+| react      | core          | kit/react/core       | The core branch for react starter kit   |
+| react      | redux         | kit/react/redux      | React with react-redux                  |
+| react      | redux-saga    | kit/react/redux-saga | React with react-redux and redux-saga   |
+
+### AngularJS (1.x)
+
+| Variation  | Sub-Variation | Branch name          | Description                             |
+|------------|---------------|----------------------|-----------------------------------------|
+| angular    | core          | kit/angular/core     | The core branch for angular starter kit |
+
+### Branch Naming Conventions for Starter Kit Variations
+
+1. Each starter kit variation must exist on separate branches.
+1. Branch names for starter kit variations must start with `kit/` and follow this structure:
+
+  ```
+  kit/{variation-name}/core
+  ```
+  
+  Where `{variation-name}` is the main library, framework, or feature for the variation.
+  
+  Branch names must always be broken into 3 parts (a part is deliminated by `/`).
+  
+  For example, the core starter kit that uses React will be on branch:
+  
+  ```
+  kit/react/core
+  
+  kit/angular/core
+  
+  kit/angular2/core
+  ```
+
+1. A starter kit variation may have variations of itself. For sub-variations, branch names must follow this structure:
+
+  ```
+  kit/{variation-name}/{subvariation-name}
+  ```
+  
+  Where `{subvariation-name}` is a short descriptor of the sub-variation.
+  
+  For example:
+  
+  ```
+  kit/react/redux
+  
+  kit/react/redux-saga
+  
+  kit/angular/ui-router
+  
+  kit/angular2/material
+  ```
 
 ## Features
 
