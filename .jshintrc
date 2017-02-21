@@ -1,0 +1,16 @@
+{
+  "asi": true,
+  "camelcase": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": true,
+  "newcap": true,
+  "quotmark": "single",
+  "strict": false,
+
+  "esversion": 6,
+  "globalstrict": true,
+
+  "browser": true,
+  "node": true
+}
