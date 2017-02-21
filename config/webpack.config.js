@@ -196,13 +196,13 @@ webpackConfig.module.rules.push({
 // File loaders
 /* eslint-disable */
 webpackConfig.module.rules.push(
-  { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
-  { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-  { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
-  { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-  { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-  { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
+  { test: /\.woff(\?.*)?$/,  loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
+  { test: /\.woff2(\?.*)?$/, loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
+  { test: /\.otf(\?.*)?$/,   loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
+  { test: /\.ttf(\?.*)?$/,   loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
+  { test: /\.eot(\?.*)?$/,   loader: 'file-loader?prefix=fonts/&name=[path][name].[ext]' },
+  { test: /\.svg(\?.*)?$/,   loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+  { test: /\.(png|jpg)$/,    loader: 'url-loader?limit=8192' }
 );
 /* eslint-enable */
 
@@ -212,26 +212,26 @@ webpackConfig.module.rules.push(
 // when we don't know the public path (we know it only when HMR is enabled [in development]) we
 // need to use the extractTextPlugin to fix this issue:
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
-if (!__DEV__) {
-  debug('Applying ExtractTextPlugin to CSS loaders.');
-  webpackConfig.module.rules.filter((loader) =>
-    loader.use && loader.use.find((name) => /css/.test(name.split('?')[0]))
-  ).forEach((loader) => {
-    debug(loader)
-    const first = loader.use[0];
-    const rest = loader.use.slice(1);
-    loader.use = ExtractTextPlugin.extract({
-      fallback: first,
-      use: rest
-    })
-  });
-
-  webpackConfig.plugins.push(
-    new ExtractTextPlugin({
-      filename : '[name].[contenthash].css',
-      allChunks : true
-    })
-  )
-}
+// if (!__DEV__) {
+//   debug('Applying ExtractTextPlugin to CSS loaders.');
+//   webpackConfig.module.rules.filter((loader) =>
+//     loader.use && loader.use.find((name) => /css/.test(name.split('?')[0]))
+//   ).forEach((loader) => {
+//     debug(loader)
+//     const first = loader.use[0];
+//     const rest = loader.use.slice(1);
+//     loader.use = ExtractTextPlugin.extract({
+//       fallback: first,
+//       use: rest
+//     })
+//   });
+//
+//   webpackConfig.plugins.push(
+//     new ExtractTextPlugin({
+//       filename : '[name].[contenthash].css',
+//       allChunks : true
+//     })
+//   )
+// }
 
 module.exports = webpackConfig;
