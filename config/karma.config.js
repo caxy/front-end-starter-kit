@@ -1,15 +1,9 @@
-const argv = require('yargs').argv
-const project = require('./project.config')
-const webpackConfig = require('./webpack.config')
-const debug = require('debug')('app:config:karma')
-const webpack = require('webpack')
+const argv = require('yargs').argv;
+const project = require('./project.config');
+const webpackConfig = require('./webpack.config');
+const debug = require('debug')('app:config:karma');
 
-debug('Creating configuration.')
-let sassLoader = webpackConfig.module.rules.filter(loader => loader.name === 'sass-loader')
-if (sassLoader.length > 0) {
-  sassLoader = sassLoader[0]
-}
-
+debug('Creating configuration.');
 const karmaConfig = {
   basePath: '../', // project root in relation to bin/karma.js
   files: [
@@ -54,10 +48,10 @@ const karmaConfig = {
   coverageReporter: {
     reporters: project.coverage_reporters
   }
-}
+};
 
 if (project.globals.__COVERAGE__) {
-  karmaConfig.reporters.push('coverage')
+  karmaConfig.reporters.push('coverage');
   karmaConfig.webpack.module.rules.push({
     test: /\.(js|jsx)$/,
     enforce: 'pre',
@@ -67,7 +61,7 @@ if (project.globals.__COVERAGE__) {
     options: Object.assign({}, project.compiler_babel, {
       plugins: (project.compiler_babel.plugins || []).concat('istanbul')
     })
-  })
+  });
 }
 
-module.exports = (cfg) => cfg.set(karmaConfig)
+module.exports = (cfg) => cfg.set(karmaConfig);

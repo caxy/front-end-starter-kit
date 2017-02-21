@@ -2,7 +2,7 @@ const argv = require('yargs').argv;
 const webpack = require('webpack');
 const cssnano = require('cssnano');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const project = require('./project.config');
 const debug = require('debug')('app:config:webpack');
 
@@ -89,27 +89,27 @@ if (__TEST__ && !argv.watch) {
         // from running making it clear that there were warnings.
         throw new Error(
           stats.compilation.errors.map(err => err.message || err)
-        )
+        );
       }
-    })
-  })
+    });
+  });
 }
 
 if (__DEV__) {
   debug('Enabling plugins for live development (HMR, NoErrors).');
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin()
-  )
+  );
 } else if (__PROD__) {
   debug('Enabling plugins for production (UglifyJS).');
   webpackConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress : {
         unused    : true,
-        dead_code : true,
+        dead_code : true
       }
     })
-  )
+  );
 }
 
 // Don't split bundles during testing, since we only want import one bundle
@@ -118,7 +118,7 @@ if (!__TEST__) {
     new webpack.optimize.CommonsChunkPlugin({
       names : ['vendor']
     })
-  )
+  );
 }
 
 // ------------------------------------

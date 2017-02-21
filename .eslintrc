@@ -14,7 +14,8 @@
     "__DEV__": false,
     "__TEST__": false,
     "__PROD__": false,
-    "__COVERAGE__": false
+    "__COVERAGE__": false,
+    "__STYLEGUIDE__": false
   },
   "rules": {
     "key-spacing": 0,
@@ -29,6 +30,10 @@
     ],
     "object-curly-spacing": [
       2,
+      "always"
+    ],
+    "semi": [
+      "error",
       "always"
     ]
   }
