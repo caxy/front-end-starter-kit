@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { injectReducer } from '../../store/reducers';
 import { injectMultipleSagas } from '../../store/sagas';
+import { requireAuthentication } from 'containers/AuthenticatedComponent';
 
 export default (store) => ({
   path : 'counter',
@@ -22,7 +23,7 @@ export default (store) => ({
       injectMultipleSagas(store, sagas);
 
       /*  Return getComponent   */
-      cb(null, Counter);
+      cb(null, requireAuthentication(Counter));
 
     /* Webpack named bundle   */
     }, 'counter')

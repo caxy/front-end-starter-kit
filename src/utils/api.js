@@ -1,8 +1,9 @@
 import fetch from 'isomorphic-fetch';
+import ls from 'local-storage';
 
 class Api {
   static defaultOptions = {
-    baseUrl: 'localhost'
+    baseUrl: 'http://symfony-starter-kit.dev/app_dev.php'
   };
 
   constructor (options) {
@@ -10,18 +11,36 @@ class Api {
   }
 
   authenticate (username, password) {
-    return this.request('/api/login', {
+    const formData = new FormData();
+    formData.append('_username', username);
+    formData.append('_password', password);
+
+    return this.request('/api/login_check', {
       method: 'post',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ _username: username, _password: password })
-    });
+      body: formData
+    })
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error(`Bad response from server: ${response.statusText}`);
+        }
+
+        return response.json().token;
+      });
+  }
+
+  storeItem (key, value) {
+    return ls(key, value);
+  }
+
+  clearItem (key) {
+    return ls.remove(key);
   }
 
   request (url, options) {
-    return fetch(url, options);
+    return fetch(`${this.options.baseUrl}${url}`, options);
   }
 }
+
+const api = new Api();
+
+export default api;

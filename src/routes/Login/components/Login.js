@@ -16,9 +16,10 @@ const Login = ({ handleSubmit }) => (
 );
 
 Login.propTypes = {
-  handleSubmit: React.PropTypes.func.isRequired
+  // handleSubmit: React.PropTypes.func.isRequired
 };
 
+// Decorate the form component with redux-form.
 export default reduxForm({
   form: 'login'
 })(Login);
