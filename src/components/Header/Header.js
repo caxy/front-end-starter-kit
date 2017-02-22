@@ -12,8 +12,12 @@ export const Header = ({auth, handleLogout}) => (
     <Link to='/counter' activeClassName='route--active'>
       Counter
     </Link>
-    {auth.username}
-    <a onClick={handleLogout}>Logout</a>
+    {auth.isAuthenticated ? (
+      <div>
+        {auth.username}
+        <a href="#" onClick={handleLogout}>Logout</a>
+      </div>
+    ) : ''}
   </div>
 );
 

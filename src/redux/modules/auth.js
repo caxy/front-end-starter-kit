@@ -67,13 +67,15 @@ const ACTION_HANDLERS = {
     isAuthenticating: false,
     isAuthenticated: false,
     token: null,
-    userName: null,
+    username: null,
+    user: null,
     statusText: `Authentication Error: ${payload.message}`
   }),
   [LOGOUT_USER]: (state, action) => Object.assign({}, state, {
     isAuthenticated: false,
     token: null,
-    userName: null,
+    username: null,
+    user: null,
     statusText: 'You have been successfully logged out.'
   })
 };
@@ -113,19 +115,8 @@ export function* authorize(user, password, redirect='/') {
   }
 }
 
-export function* doDoubleAsync() {
-  yield call(delay, 1000);
-  yield put(double());
-}
-
-// Our watcher Saga: spawn a new doubleAsync task on each INCREMENT_ASYNC
-export function* watchIncrementAsync() {
-  yield takeEvery(COUNTER_DOUBLE_ASYNC, doDoubleAsync);
-}
-
 // Export the sagas, which is used in ./../index.js to add them to the store.
 export const sagas = {
-  watchIncrementAsync,
   loginFlow
 };
 

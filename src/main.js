@@ -4,11 +4,27 @@ import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import Api from 'utils/api';
+import jwtDecode from 'jwt-decode';
 
 // ========================================================
 // Store Instantiation
 // ========================================================
-const initialState = window.___INITIAL_STATE__;
+const initialState = window.___INITIAL_STATE__ || {};
+
+if (!initialState.hasOwnProperty('auth') && Api.getItemFromStorage('token')) {
+  const token = Api.getItemFromStorage('token');
+  const user = jwtDecode(token);
+  initialState.auth = {
+    isAuthenticating: false,
+    isAuthenticated: true,
+    token: token,
+    username: user.username,
+    user,
+    statusText: 'You have been successfully logged in.'
+  }
+}
+
 const store = createStore(initialState);
 
 const history = syncHistoryWithStore(browserHistory, store);

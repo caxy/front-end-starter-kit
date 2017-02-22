@@ -35,6 +35,10 @@ class Api {
     return ls(key, value);
   }
 
+  getItemFromStorage (key) {
+    return ls(key);
+  }
+
   clearItem (key) {
     return ls.remove(key);
   }
