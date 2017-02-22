@@ -6,8 +6,10 @@ const mapDispatchToProps = {
   onSubmit: loginUser
 };
 
-const mapStateToProps = (state) => ({
-
+const mapStateToProps = (state, ownProps) => ({
+  initialValues: {
+    redirect: ownProps.location.query.next
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

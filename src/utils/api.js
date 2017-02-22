@@ -24,7 +24,10 @@ class Api {
           throw new Error(`Bad response from server: ${response.statusText}`);
         }
 
-        return response.json().token;
+        return response.json();
+      })
+      .then(json => {
+        return json.token;
       });
   }
 

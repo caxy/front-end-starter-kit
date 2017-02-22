@@ -1,13 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import createStore from './store/createStore'
-import AppContainer from './containers/AppContainer'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import createStore from './store/createStore';
+import AppContainer from './containers/AppContainer';
+import { browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 // ========================================================
 // Store Instantiation
 // ========================================================
 const initialState = window.___INITIAL_STATE__;
 const store = createStore(initialState);
+
+const history = syncHistoryWithStore(browserHistory, store);
 
 // ========================================================
 // Render Setup
@@ -18,7 +22,7 @@ let render = () => {
   const routes = require('./routes/index').default(store);
 
   ReactDOM.render(
-  <AppContainer store={store} routes={routes} />,
+  <AppContainer store={store} routes={routes} history={history} />,
     MOUNT_NODE
   )
 };

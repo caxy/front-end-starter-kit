@@ -2,6 +2,7 @@ import { delay } from 'redux-saga';
 import { fork, put, call, takeEvery, cancel, cancelled, take } from 'redux-saga/effects';
 import Api from '../../utils/api';
 import jwtDecode from 'jwt-decode';
+import { push } from 'react-router-redux';
 
 // ------------------------------------
 // Constants
@@ -15,9 +16,8 @@ export const LOGOUT_USER = 'auth/LOGOUT_USER';
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function loginUser (data, redirect='/') {
-  console.log('DISPATCHING LOGIN_USER');
-  return { type: LOGIN_USER, payload: { username: data.username, password: data.password, redirect } };
+export function loginUser ({ username, password, redirect='/' }) {
+  return { type: LOGIN_USER, payload: { username, password, redirect } };
 }
 
 export function loginUserRequest () {
@@ -52,13 +52,17 @@ const ACTION_HANDLERS = {
     isAuthenticating: true,
     statusText: null
   }),
-  [LOGIN_USER_SUCCESS]: (state, {payload}) => Object.assign({}, state, {
-    isAuthenticating: false,
-    isAuthenticated: true,
-    token: payload.token,
-    userName: jwtDecode(payload.token).userName,
-    statusText: 'You have been successfully logged in.'
-  }),
+  [LOGIN_USER_SUCCESS]: (state, {payload}) => {
+    const user = jwtDecode(payload.token);
+    return Object.assign({}, state, {
+      isAuthenticating: false,
+      isAuthenticated: true,
+      token: payload.token,
+      username: user.username,
+      user,
+      statusText: 'You have been successfully logged in.'
+    })
+  },
   [LOGIN_USER_FAILURE]: (state, {payload}) => Object.assign({}, state, {
     isAuthenticating: false,
     isAuthenticated: false,
@@ -81,9 +85,8 @@ const ACTION_HANDLERS = {
 export function* loginFlow () {
   while (true) {
     const {payload: {username, password, redirect}} = yield take(LOGIN_USER);
-    console.log('forking auth');
     // fork return a Task object.
-    const task = yield fork(authorize, username, password);
+    const task = yield fork(authorize, username, password, redirect);
     const action = yield take([LOGOUT_USER, LOGIN_USER_FAILURE]);
     if (action.type === LOGOUT_USER) {
       yield cancel(task);
@@ -93,12 +96,12 @@ export function* loginFlow () {
   }
 }
 
-export function* authorize(user, password) {
+export function* authorize(user, password, redirect='/') {
   try {
     const token = yield call([Api, Api.authenticate], user, password);
-    console.log(token);
     yield put(loginUserSuccess(token));
     yield call([Api, Api.storeItem], 'token', token);
+    yield put(push(redirect));
 
     return token;
   } catch (error) {
@@ -131,6 +134,7 @@ export const sagas = {
 // ------------------------------------
 const initialState = {
   token: null,
+  user: null,
   userName: null,
   isAuthenticated: false,
   isAuthenticating: false,

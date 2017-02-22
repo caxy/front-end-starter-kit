@@ -2,12 +2,14 @@ import { combineReducers } from 'redux';
 import locationReducer from './location';
 import { reducer as formReducer } from 'redux-form';
 import authReducer from '../redux/modules/auth';
+import { routerReducer } from 'react-router-redux';
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     auth: authReducer,
     location: locationReducer,
     form: formReducer,
+    routing: routerReducer,
     ...asyncReducers
   })
 };

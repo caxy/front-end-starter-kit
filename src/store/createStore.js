@@ -5,13 +5,14 @@ import makeRootReducer from './reducers';
 import makeRootSaga from './sagas';
 import { updateLocation } from './location';
 import createSagaMiddleware from 'redux-saga';
+import { routerMiddleware } from 'react-router-redux';
 
 export default (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
   const sagaMiddleware = createSagaMiddleware();
-  const middleware = [thunk, sagaMiddleware];
+  const middleware = [thunk, routerMiddleware(browserHistory), sagaMiddleware];
 
   // ======================================================
   // Store Enhancers

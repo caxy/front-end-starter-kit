@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {browserHistory} from 'react-router';
+import {push} from 'react-router-redux';
 
 export function requireAuthentication (Component) {
 
@@ -17,7 +17,7 @@ export function requireAuthentication (Component) {
     checkAuth (isAuthenticated) {
       if (!isAuthenticated) {
         let redirectAfterLogin = this.props.location.pathname;
-        this.props.dispatch(browserHistory.push(`/login?next=${redirectAfterLogin}`));
+        this.props.dispatch(push(`/login?next=${redirectAfterLogin}`));
       }
     }
 
