@@ -1,6 +1,6 @@
-import CounterRoute from 'routes/Counter'
+import CounterRoute from 'routes/Profile'
 
-describe('(Route) Counter', () => {
+describe('(Route) Profile', () => {
   let _route
 
   beforeEach(() => {

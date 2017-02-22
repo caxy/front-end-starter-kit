@@ -25,7 +25,7 @@ describe('(Component) Header', () => {
       )).to.be.true
     })
 
-    it('Should render a Link to Counter route', () => {
+    it('Should render a Link to Profile route', () => {
       expect(_wrapper.contains(
         <Link activeClassName='route--active' to='/counter'>
           Counter

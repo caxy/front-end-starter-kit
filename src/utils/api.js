@@ -15,20 +15,27 @@ class Api {
     formData.append('_username', username);
     formData.append('_password', password);
 
-    return this.request('/api/login_check', {
+    return this.requestJson('api/login_check', {
       method: 'post',
       body: formData
     })
-      .then(response => {
-        if (response.status >= 400) {
-          throw new Error(`Bad response from server: ${response.statusText}`);
-        }
-
-        return response.json();
-      })
       .then(json => {
         return json.token;
       });
+  }
+
+  getUser (id) {
+    return this.requestJson(`users/${id}`);
+  }
+
+  putUser (user) {
+    return this.requestJson(`users/${user.id}`, {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    });
   }
 
   storeItem (key, value) {
@@ -43,8 +50,19 @@ class Api {
     return ls.remove(key);
   }
 
+  requestJson (url, options) {
+    return this.request(url, options)
+      .then(response => {
+        if (response.status >= 400) {
+          throw new Error(`Bad response from server: ${response.statusText}`);
+        }
+
+        response.json();
+      });
+  }
+
   request (url, options) {
-    return fetch(`${this.options.baseUrl}${url}`, options);
+    return fetch(`${this.options.baseUrl}/${url}`, options);
   }
 }
 

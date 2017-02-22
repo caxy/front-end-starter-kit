@@ -1,9 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { Counter } from 'routes/Counter/components/Counter'
+import { Counter } from 'routes/Profile/components/Profile'
 import { shallow } from 'enzyme'
 
-describe('(Component) Counter', () => {
+describe('(Component) Profile', () => {
   let _props, _spies, _wrapper
 
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('(Component) Counter', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
 
-  it('Should render with an <h2> that includes Sample Counter text.', () => {
+  it('Should render with an <h2> that includes Sample Profile text.', () => {
     expect(_wrapper.find('h2').text()).to.match(/Counter:/)
   })
 
